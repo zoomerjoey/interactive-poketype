@@ -72,20 +72,33 @@ def attackingChecker(typePos):
 def normalRemover(list):
     # first layer groups by effectiveness with: weak, resist, nullified. second layer groups parts of each type: text, color, icon
     finalData = [[[], [], []], [[], [], []], [[], [], []]]
+    effectiveness_data = []
+
     for i in range(len(list)):
-        if list[i] > 1:
-            finalData[0][0].append(pokeTypes[i] + " X " + str(list[i]))
-            finalData[0][1].append(typeColors[i])
-            finalData[0][2].append(typeIcons[i])
-        elif list[i] < 1 and list[i] != 0:
-            finalData[1][0].append(
-                pokeTypes[i] + " / " + str(rounded(1/list[i])))
-            finalData[1][1].append(typeColors[i])
-            finalData[1][2].append(typeIcons[i])
-        elif list[i] == 0:
-            finalData[2][0].append(pokeTypes[i])
-            finalData[2][1].append(typeColors[i])
-            finalData[2][2].append(typeIcons[i])
+        effectiveness_data.append((pokeTypes[i], typeColors[i], typeIcons[i], list[i]))
+
+    # Sort by effectiveness in descending order
+    effectiveness_data.sort(key=lambda x: x[3], reverse=True)
+
+    for data in effectiveness_data:
+        poke_type, color, icon, effectiveness = data
+        if effectiveness > 1:
+            finalData[0][0].append(poke_type + " X " + str(effectiveness))
+            finalData[0][1].append(color)
+            finalData[0][2].append(icon)
+        elif effectiveness < 1 and effectiveness != 0:
+            if effectiveness == 0.25:
+                finalData[1][0].insert(0,poke_type + " / " + str(rounded(1/effectiveness)))
+                finalData[1][1].insert(0,color)
+                finalData[1][2].insert(0,icon)
+            else:
+                finalData[1][0].append(poke_type + " / " + str(rounded(1/effectiveness)))
+                finalData[1][1].append(color)
+                finalData[1][2].append(icon)
+        elif effectiveness == 0:
+            finalData[2][0].append(poke_type)
+            finalData[2][1].append(color)
+            finalData[2][2].append(icon)
             
     valueDisplay(finalData)
 
