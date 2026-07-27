@@ -1,11 +1,12 @@
 from cmu_graphics import *
+import os
 
 # variable and values defined
 pokeTypes = ["NORMAL", "FIRE", "WATER", "ELECTRIC", "GRASS", "ICE", "FIGHTING", "POISON",
              "GROUND", "FLYING", "PSYCHIC", "BUG", "ROCK", "GHOST", "DRAGON", "DARK", "STEEL", "FAIRY"]
 typeColors = [rgb(168, 168, 120), rgb(240, 128, 48), rgb(104, 144, 240), rgb(248, 208, 38), rgb(120, 200, 80), rgb(152, 216, 216), rgb(192, 28, 40), rgb(160, 64, 160), rgb(
     224, 192, 104), rgb(168, 144, 240), rgb(248, 88, 136), rgb(168, 184, 32), rgb(184, 160, 56), rgb(112, 88, 152), rgb(112, 56, 248), rgb(112, 88, 72), rgb(184, 184, 208), rgb(238, 153, 172)]
-typeIcons = [f"pokemonIcons\\{i.lower()}.png" for i in pokeTypes]
+typeIcons = [os.path.join(f"pokemonIcons", f"{i.lower()}.png") for i in pokeTypes]
 typeChart = [
     [1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1],             # normal
     [1, .5, 2, 1, .5, .5, 1, 1, 2, 1, 1, .5, 2, 1, 1, 1, .5, .5],       # fire
