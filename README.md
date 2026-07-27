@@ -4,6 +4,7 @@ to reselect types, click the banner of the type would like to reselect
 
 requires cmu-graphics to work if your cloning the repo, to install use
 `pip install cmu-graphics`
+or use the requirements.txt
 
 
 # copywrite things
